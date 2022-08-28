@@ -15,7 +15,11 @@ def pre_install():
         print("Working dir is " + os.getcwd())
         with open("bluepy_mjg59/version.h","w") as verfile:
             verfile.write('#define VERSION_STRING "%s"\n' % VERSION)
-        for cmd in [ "make -C ./bluepy_mjg59 clean", "make -C bluepy_mjg59 -j1" ]:
+        for cmd in [ 
+                "apk add make pkgconfig build-base glib-dev",
+                "make -C ./bluepy_mjg59 clean",
+                "make -C bluepy_mjg59 -j1" 
+            ]:
             print("execute " + cmd)
             msgs = subprocess.check_output(shlex.split(cmd), stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
